@@ -1,0 +1,23 @@
+version: "3.9"
+services:
+  onlinebuild:
+    container_name: onlinewithVolume
+    image: revelare/gabsikarim_autobuild:latest
+    pull_policy: always
+    ports:
+      - "5000:5000"
+    volumes:
+      - TestVolume:/app
+  localbuild:
+    container_name: onlinewithVolume
+    build:
+      dockerfile: DockerFileVolume
+    image: localautobuild:latest
+    ports:
+      - "5001:5000"
+    volumes:
+      - TestVolume:/app
+volumes:
+  TestVolume:
+    external: false
+    name: TestVolume
